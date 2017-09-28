@@ -30,6 +30,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     geocoder.geocode(req.body.location, function (err, data) {
         if(err) {
             console.log(err);
+            req.flash("error", err.message);
             res.redirect("/campgrounds");
         } else {
             var lat = data.results[0].geometry.location.lat;
